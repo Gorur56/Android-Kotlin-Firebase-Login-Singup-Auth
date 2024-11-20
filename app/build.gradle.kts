@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.loginsingupauth"
-        minSdk = 19
+        minSdk = 27
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -32,6 +32,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
