@@ -39,7 +39,7 @@
             <EditText
                 android:layout_width="350dp"
                 android:layout_height="60dp"
-                android:id="@+id/Edittext_signup_confirm"
+                android:id="@+id/Edittext_login_password"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/lavender_border"
                 android:padding="16dp"
