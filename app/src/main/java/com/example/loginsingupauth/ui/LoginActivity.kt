@@ -1,8 +1,13 @@
 package com.example.loginsingupauth.ui
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Patterns
+import android.widget.Button
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -44,10 +49,46 @@ class LoginActivity : AppCompatActivity() {
                 Snackbar.make(binding.root, "Fields cannot be empty", Snackbar.LENGTH_SHORT).show()
             }
         }
+
+        binding.textviewForgotPassword.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val view = layoutInflater.inflate(R.layout.dialog_forgot, null)
+            val userEmail = view.findViewById<EditText>(R.id.editBox)
+            builder.setView(view)
+            val dialog = builder.create()
+            view.findViewById<Button>(R.id.buttonReset).setOnClickListener {
+                compareEmail(userEmail)
+                dialog.dismiss()
+            }
+            view.findViewById<Button>(R.id.buttonCancel).setOnClickListener {
+                dialog.dismiss()
+            }
+            if (dialog.window != null){
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+            }
+            dialog.show()
+        }
+
         binding.textviewSingupRedirectText.setOnClickListener {
             val intent = Intent(this, SingupActivity::class.java)
             startActivity(intent)
         }
     }
 
+    //Outside onCreate
+
+    private fun compareEmail(email: EditText){
+        if (email.text.toString().isEmpty()){
+            return
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
+            return
+        }
+        firebaseAuth.sendPasswordResetEmail(email.text.toString())
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Snackbar.make(binding.root, "Check your email", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+    }
 }
