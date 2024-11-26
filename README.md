@@ -10,7 +10,7 @@
 
 * ###### FORGOT PASSWORD
 
-* ![image](https://github.com/user-attachments/assets/7d22015c-7e2f-413b-8361-5a13798e8653)
+ ![image](https://github.com/user-attachments/assets/7d22015c-7e2f-413b-8361-5a13798e8653)
 
 * ###### ENTER LOGIN
 
